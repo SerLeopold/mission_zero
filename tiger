@@ -1,0 +1,40 @@
+# Import the libraries
+from sense_hat import SenseHat
+from time import sleep
+
+# Set up the Sense HAT
+sense = SenseHat()
+sense.set_rotation(270, False)
+
+# Set up the colour sensor
+sense.color.gain = 60 # Set the sensitivity of the sensor
+sense.color.integration_cycles = 64 # The interval at which the reading will be taken
+
+# Add colour variables and image
+c = (0, 0, 0) # Black
+t = (255, 140, 0) # DarkOrange
+a = (255, 255, 255) # White
+h = (0, 255, 255) # Cyan
+b = (1, 1, 1) # AlmostBlack
+w = (255, 192, 203) # Pink
+z = (226, 223, 126) # LightYellow
+
+for i in range(28):
+    rgb = sense.color # get the colour from the sensor
+    c = (rgb.red, rgb.green, rgb.blue) # use the sensed colour
+    
+    # Display the image
+    
+    image = [
+        t, t, b, b, b, b, t, t, 
+        t, a, t, b, b, t, a, t,
+        b, t, h, t, t, h, t, b,
+        t, t, t, t, t, t, t, t,
+        b, b, t, b, b, t, b, b,
+        b, t, b, w, w, b, t, b,
+        c, b, z, b, b, z, b, c,
+        c, c, z, z, z, z, c, c]
+    
+    sense.set_pixels(image)
+    sleep(1)
+    
